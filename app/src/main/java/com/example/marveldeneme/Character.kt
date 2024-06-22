@@ -6,18 +6,25 @@ data class Character(
     val name: String,
     val description: String,
     val thumbnail: Thumbnail
-){
-    val fullImageUrl: String
-        get() = "${thumbnail.path.replace("http://", "https://")}/portrait_xlarge.${thumbnail.extension}"
-
+) {
+    var fullImageUrl: String
+        get() = "${
+            thumbnail.path.replace(
+                "http://",
+                "https://"
+            )
+        }/portrait_xlarge.${thumbnail.extension}"
+        set(value) {
+            // Setter gerekirse buraya kod ekleyebilirsiniz
+        }
 }
 
-data class Thumbnail(
-    val path: String,
-    val extension: String
-)
 
-data class CharacterResponse(val data: CharacterData)
+    data class Thumbnail(
+        val path: String,
+        val extension: String
+    )
 
-data class CharacterData(val results: List<Character>)
+    data class CharacterResponse(val data: CharacterData)
 
+    data class CharacterData(val results: List<Character>)
