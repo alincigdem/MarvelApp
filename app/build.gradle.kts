@@ -1,6 +1,10 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id ("com.google.devtools.ksp")
+    id("androidx.navigation.safeargs.kotlin")
+    id ("kotlin-parcelize")
+
 }
 
 android {
@@ -38,6 +42,10 @@ android {
         enable = true
     }
 
+    buildFeatures {
+        dataBinding = true
+    }
+
 
 }
 
@@ -59,4 +67,22 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation ("com.github.bumptech.glide:glide:4.13.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.13.0")
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.9.10")
+
+    val nav_version = "2.7.7"
+    // Navigation
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+
+
+    val room_version = "2.6.1"
+
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor ("androidx.room:room-compiler:$room_version")
+    // To use Kotlin annotation processing tool (kapt)
+    ksp("androidx.room:room-compiler:$room_version")
+
+    implementation ("androidx.room:room-rxjava3:$room_version")
+    implementation ("io.reactivex.rxjava3:rxandroid:3.0.2")
+
 }

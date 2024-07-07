@@ -8,10 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class CharacterAdapter(private val characters: MutableList<Character>) : RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>() {
+class CharacterAdapter(private val characters: MutableList<Character>,
+                       private val onItemClick: (Character) -> Unit) : RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_character, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_character, parent, false)
         return CharacterViewHolder(view)
     }
 
@@ -42,6 +44,10 @@ class CharacterAdapter(private val characters: MutableList<Character>) : Recycle
                 .override(250, 250) // İmgenin belirli bir boyutunu yükler
                 .centerCrop() // İmgeyi görüntünün ortasına yerleştirir ve orantılı bir şekilde kırpar
                 .into(imgCharacter)
+
+            itemView.setOnClickListener {
+                onItemClick(character)
+            }
         }
     }
 }
